@@ -66,18 +66,22 @@ export const getCurrentLocation = (): Promise<LocationCoordinates> => {
 /**
  * Mở ứng dụng Google Maps với tọa độ chính xác
  */
-export const openLocationInGoogleMaps = (latitude: number, longitude: number) => {
-  const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-  Linking.canOpenURL(url)
-    .then((supported) => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        Alert.alert('Lỗi', 'Thiết bị không hỗ trợ mở liên kết bản đồ.');
+export const openLocationInGoogleMaps = async (latitude: number, longitude: number) => {
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+  const geoUrl = `geo:${latitude},${longitude}?q=${latitude},${longitude}`;
+
+  try {
+    if (Platform.OS === 'android') {
+      try {
+        await Linking.openURL(geoUrl);
+        return;
+      } catch {
+        // Nếu không có app xử lý geo intent thì mở link Google Maps
       }
-    })
-    .catch((err) => {
-      console.warn('Không thể mở bản đồ:', err);
-      Alert.alert('Lỗi', 'Không thể mở Google Maps.');
-    });
+    }
+    await Linking.openURL(mapUrl);
+  } catch (err) {
+    console.warn('Không thể mở bản đồ:', err);
+    Alert.alert('Lỗi', 'Không thể mở liên kết bản đồ trên thiết bị.');
+  }
 };

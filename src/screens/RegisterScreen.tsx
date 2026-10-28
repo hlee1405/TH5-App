@@ -121,9 +121,6 @@ export const RegisterScreen: React.FC = () => {
             },
           ]}>
           <Text style={[styles.formTitle, { color: colors.text }]}>Đăng ký tài khoản</Text>
-          <Text style={[styles.formSubtitle, { color: colors.textMuted }]}>
-            Điền đầy đủ các thông tin bên dưới
-          </Text>
 
           {/* Error Banner */}
           {errorMessage ? (
@@ -323,13 +320,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   formTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '700',
-  },
-  formSubtitle: {
-    fontSize: 13,
-    marginTop: 4,
-    marginBottom: 16,
+    textAlign: 'center',
+    marginBottom: 20,
   },
   errorBox: {
     flexDirection: 'row',

@@ -64,11 +64,7 @@ export const LoginScreen: React.FC = () => {
     }
   };
 
-  const handleQuickFill = (demoEmail: string, demoPass: string) => {
-    setEmail(demoEmail);
-    setPassword(demoPass);
-    setErrorMessage('');
-  };
+
 
   return (
     <KeyboardAvoidingView
@@ -103,9 +99,6 @@ export const LoginScreen: React.FC = () => {
             },
           ]}>
           <Text style={[styles.formTitle, { color: colors.text }]}>Đăng nhập</Text>
-          <Text style={[styles.formSubtitle, { color: colors.textMuted }]}>
-            Nhập email và mật khẩu tài khoản Firebase của bạn
-          </Text>
 
           {/* Banner thông báo trạng thái cấu hình Firebase */}
           {!isFirebaseConfigured() ? (
@@ -218,29 +211,6 @@ export const LoginScreen: React.FC = () => {
               </Text>
             </TouchableOpacity>
           </View>
-
-          {/* Demo test helper */}
-          <View style={styles.demoSection}>
-            <Text style={[styles.demoTitle, { color: colors.textMuted }]}>
-              Gợi ý tài khoản kiểm thử 2 người nhắn tin:
-            </Text>
-            <View style={styles.demoButtonsRow}>
-              <TouchableOpacity
-                style={[styles.demoChip, { backgroundColor: colors.inputBg }]}
-                onPress={() => handleQuickFill('user1@example.com', '123456')}>
-                <Text style={[styles.demoChipText, { color: colors.primary }]}>
-                  User 1 (user1@example.com)
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.demoChip, { backgroundColor: colors.inputBg }]}
-                onPress={() => handleQuickFill('user2@example.com', '123456')}>
-                <Text style={[styles.demoChipText, { color: colors.primary }]}>
-                  User 2 (user2@example.com)
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -277,13 +247,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   formTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '700',
-  },
-  formSubtitle: {
-    fontSize: 13,
-    marginTop: 4,
-    marginBottom: 18,
+    textAlign: 'center',
+    marginBottom: 20,
   },
   errorBox: {
     flexDirection: 'row',
@@ -361,30 +328,6 @@ const styles = StyleSheet.create({
   switchAuthLink: {
     fontSize: 13,
     fontWeight: '700',
-  },
-  demoSection: {
-    marginTop: 20,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E2E8F0',
-  },
-  demoTitle: {
-    fontSize: 12,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  demoButtonsRow: {
-    gap: 8,
-  },
-  demoChip: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  demoChipText: {
-    fontSize: 12,
-    fontWeight: '600',
   },
   demoNoticeBox: {
     backgroundColor: '#EFF6FF',
